@@ -3,12 +3,12 @@ title: "new post"
 date: {{ .Date }}
 tags: [""]
 author: "Hubert Lin"
-showToc: true
+showToc: false
 TocOpen: false
 draft: true
 hidemeta: false
 comments: false
-description: "todo"
+description: ""
 disableHLJS: false # to disable highlightjs
 disableShare: false
 searchHidden: false
