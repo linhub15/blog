@@ -37,9 +37,9 @@ Create a 404.html page and copy the contents of index.html into that page. Cloud
 
 1. Create an empty 404.html page in /src/ directory
 2. Add "404.html" to the "projects/[your-app]/architect/build/options/assets" array found in the src/angular.json file
-3. <code>ng build –-prod</code>
+3. `ng build --prod`
 4. Copy the contents of the /dist/index.html into /dist/404.html
-5. git commit / git push
+5. `git commit` / `git push`
 
 The most important step is to make sure that the 404.html contents match index.html exactly. Since each ng-build changes the file hashes and references in index.html this must be done to ensure routing works.
 

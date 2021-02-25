@@ -37,7 +37,7 @@ I don't just mean there needs to be maximum line lengths in our code, but I'm cr
 
 Let me answer that with a question. What's easier to read?
 
-~~~
+~~~plaintext
 Dear Sir or Madam,
 
 I am writing to you today in regards to a very noisy dog. Your very noisy dog to be precise. Please keep your dog inside the house at night after 9:00 PM so that it does not wake us up from our slumber.
@@ -49,7 +49,7 @@ Your neighbour
 
 Or the email broken up…
 
-~~~
+~~~plaintext
 I am writing to you today in regards to a very noisy dog.
 Your very noisy dog to be precise.
 Please keep your dog inside the house at night after 9:00 PM
@@ -58,7 +58,7 @@ so that it does not wake us up from our slumber.
 
 Long if statements like this?
 
-~~~
+~~~csharp
 if (userName != null && password != null && email != String.Empty && dateTime.IsValid || overrideValidation)
 {
   RegisterUser(userName, password, email);
@@ -67,7 +67,7 @@ if (userName != null && password != null && email != String.Empty && dateTime.Is
 
 Or with maximum line lengths?
 
-~~~
+~~~csharp
 if (userName != null
     && password != null
     && email != String.Empty
@@ -79,3 +79,6 @@ if (userName != null
 ~~~
 
 I believe that if we can reduce the line lengths of our documents, we can make our lives a little easier at work. Who knows, maybe your colleagues might notice the extra effort you put into your emails.
+
+
+Horizontal scroll sure is annoying!

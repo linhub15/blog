@@ -23,12 +23,12 @@ cover:
 
 Yes that's right, I built my first website for a paying client. Although not the greatest accomplishment, I want to share my experience so you and other business owners can get some perspective.
 
-With SquareSpace, Shopify, Wix and all those other website building apps, it seems like there really isn't a reason to hire a web developer these days. I mean, why would someone pay a few hundred dollars when they could just pay $9.99 and get a really good looking site?&nbsp;
+With SquareSpace, Shopify, Wix and all those other website building apps, it seems like there really isn't a reason to hire a web developer these days. I mean, why would someone pay a few hundred dollars when they could just pay $9.99 and get a really good looking site?
 
 Well… here's a few reasons:
 
 * Save your time for running your business, not learning html, css, and javascript
-* Prevent future headache by letting me set things up right the first time&nbsp;
+* Prevent future headache by letting me set things up right the first time
 * Get an action oriented website, not a generic template that everyone else uses
 * Need someone to blame? You got my number!
 
@@ -42,13 +42,13 @@ So once I got a client that talked over Kijiji and had some general requirements
 
 ## Development
 
-Now that the hard parts out of the way, I began working with my graphics designer friend to set up the wireframe and prototype. We use [Adobe XD](https://www.adobe.com/ca/products/xd.html){: target="_blank"} cause it's got an amazing publish feature that lets the client see your prototype over the web and, of course, **it's&nbsp;****free**.&nbsp;
+Now that the hard parts out of the way, I began working with my graphics designer friend to set up the wireframe and prototype. We use Adobe XD cause it's got an amazing publish feature that lets the client see your prototype over the web and, of course, it's **free**.
 
 With all the content compiled and ready to go, we setup the layout and get sign-off from the client. Next we content and images are put into the layout and again get client approval. Finally we add colors, background images and all the fancy stuff. At this point the client was pretty satisfied with the product because we consulted them after each major addition.
 
-**Communication is Key**
+### Communication is Key
 
-With all the designs complete all that's left is to code. Very straight forward. We use [Jekyll](https://jekyllrb.com/){: target="_blank"}, a Ruby static site generator, and host our sites on [CloudCannon](https://cloudcannon.com/){: target="_blank"}.&nbsp;
+With all the designs complete all that's left is to code. Very straight forward. We use [Jekyll](https://jekyllrb.com/), a Ruby static site generator, and host our sites on [CloudCannon](https://cloudcannon.com/).
 
 ## Deployment, Hosting & Happily Ever After?
 
@@ -63,11 +63,11 @@ Tips and tricks coming from a first time SEO-er
 * SEO page names (e.g. https://example.com/cheap-website-designs.html)
 * Optimize for speed (minify css & js, compress images, reduce number of dependent requests)
 * Search the phrase you want to rank in and click your website with as many different IP addresses to increase rankings (it works... it went from page 5 to page 1)
-* Use [Google Search Console](https://search.google.com/search-console/about){: target="_blank"} to see how your site is doing (it takes a few days to crawl and index)
+* Use [Google Search Console](https://search.google.com/search-console/about) to see how your site is doing (it takes a few days to crawl and index)
 
 ## Conclusion
 
-So in the end of the project I got paid what I quoted plus a little bonus. Spent about 40 hours developing the site, and almost 20 hours figuring out how to do SEO making small tweaks here and there. I would definitely charge more next time just because it takes so much time to design. All in all, it was a good experience working with the client and my designer friend.&nbsp;
+So in the end of the project I got paid what I quoted plus a little bonus. Spent about 40 hours developing the site, and almost 20 hours figuring out how to do SEO making small tweaks here and there. I would definitely charge more next time just because it takes so much time to design. All in all, it was a good experience working with the client and my designer friend.
 
 Until next time!
 

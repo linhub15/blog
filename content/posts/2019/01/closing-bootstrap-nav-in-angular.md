@@ -25,7 +25,7 @@ cover:
 * Does your app use Angular 6+?
 * Does navbar stay open even when navigating to different components? (Mobile)
 
-I fixed the problem using Angular [attribute directive](https://angular.io/guide/attribute-directives){: target="_blank"}.
+I fixed the problem using Angular [attribute directive](https://angular.io/guide/attribute-directives).
 
 ### How the bootstrap toggler works
 
@@ -62,7 +62,8 @@ To use the directive, place the selector name on the desired html element that y
 ```
 <app-top-nav></app-top-nav>
 
-<div id="content-wrapper" appCloseNav> <!-- appCloseNav directive closes the top-nav.component -->
+<!-- appCloseNav directive closes the top-nav.component -->
+<div id="content-wrapper" appCloseNav> 
   <div class="container" role="document">
     <div class="row">
       <section class="col-12 mt-1" id="content" >

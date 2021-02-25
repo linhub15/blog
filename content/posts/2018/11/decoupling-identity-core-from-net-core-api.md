@@ -20,17 +20,13 @@ cover:
   hidden: true # only hide on current single page
 ---
 
-During my quest to make my architecture "clean" there was a **HUGE** dependency that needed to be inverted: <u><em>Microsoft.AspNetCore.Identity</em></u>. Even though many applications require authentication, we still shouldn't be depending on any authentication frameworks.
-{: .present-before-paste}
+During my quest to make my architecture "clean" there was a huge dependency that needed to be inverted `Microsoft.AspNetCore.Identity`. Even though many applications require authentication, we still shouldn't be depending on any authentication frameworks.
 
 According to Robert C. Martin we shouldn't depend on a framework because the business rules can change or the frameworks can change. We keep things loosely coupled so that in case we need to swap out an implementation we can do so without affecting our business rules.
-{: .present-before-paste}
 
-At first, my code following typical ASP.NET Core folder structure: Models, Controllers etc. I had the authentication logic in my *AuthenticationController.cs,*&nbsp;so that's where I injected UserManager&lt;TUser&gt; and SignInManager&lt;TUser&gt;. Just in case you're not familiar with Identity Core, those two managers help us handle users and signing them in. The &lt;TUser&gt; is a class of user, e.g. IdentityUser is the Microsoft User class.
-{: .present-before-paste}
+At first, my code following typical ASP.NET Core folder structure: Models, Controllers etc. I had the authentication logic in my `AuthenticationController.cs`, so that's where I injected `UserManager<TUser>` and `SignInManager<TUser>`. Just in case you're not familiar with Identity Core, those two managers help us handle users and signing them in. The `TUser` is a class of user, e.g. `IdentityUser` is the Microsoft User class.
 
 The newly decoupled project layout follows this folder structure:
-{: .present-before-paste}
 
 1. Core - Core Business details, does not depend on anything but itself
 2. Infrastructure - Implements and depends on core interfaces
@@ -40,30 +36,34 @@ The newly decoupled project layout follows this folder structure:
 
 #### 1. Define authentication methods
 
-We need to ***register*** and ***sign in*** a user. I didn't include a ***sign out*** because I will be using JSON Web tokens and they will have a short expiry date. It's&nbsp;<u>not secure</u> so don't do this in a real application.
-{: .present-before-paste}
+We need to `Register` and `SignIn` a user. I didn't include a ***sign out*** because I will be using JSON Web tokens and they will have a short expiry date. It's not secure so don't do this in a real application.
 
-![](/uploads/iauthenticator-1.jpg)
-{: .present-before-paste}
+```csharp
+public interface IAuthenticator
+{
+    bool Register(User user);
+    string SignIn(string userName, string password);
+}
+```
 
 #### 2. Define User Class
-{: .present-before-paste}
 
-Next, we'll need to define the&nbsp;**User**&nbsp;object that we're passing into Register. In my case I only have 3 fields. User name, email, and password.
-{: .present-before-paste}
+Next, we'll need to define the `User` object that we're passing into Register. In my case I only have 3 fields. User name, email, and password.
 
-![](/uploads/user.jpg)
-{: .present-before-paste}
-
-That's it for the Core.
-{: .present-before-paste}
+```csharp
+public class User
+{
+    public string UserName { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
+}
+```
 
 #### 3. Implement IAuthenticator in Infrastructure
-{: .present-before-paste}
 
 In the infrastructure layer, we create an Authenticator to implement the IAuthenticator interface. This is where we include dependencies on Microsoft.AspNetCore.Identity as well as all other dependencies we will be using.
 
-* Use dependency injection for any required objects / services / managers… etc
+* Use dependency injection for any required objects / services / managers... etc
 * Include helper method to generate JSON Web Token
 
 ```csharp
@@ -138,13 +138,12 @@ public string SignIn(string userName, string password)
     }
     else
     {
-        return  "result.Succeeded == false";
+        return "result.Succeeded == false";
     }
 }
 ```
 
 #### 4. Use the Authenticator in our API Controller
-{: .present-before-paste}
 
 With the implementation complete we can pass in our Authenticator instance with dependency injection into the controller.
 
@@ -177,4 +176,5 @@ public class AuthenticationController : ControllerBase
 }
 ```
 
-This code refactoring was inspired by "Clean Architecture" by Robert C. Martin. I'm still pretty new at software design and programming so feel free to offer suggestions and point out any errors you find.
+This code refactoring was inspired by "Clean Architecture" by Robert C. Martin.
+I'm still pretty new at software design and programming so feel free to offer suggestions and point out any errors you find.
