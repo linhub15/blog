@@ -1,5 +1,5 @@
 baseURL: "http://example.org/"
-title: Hubert Lin - Birdy
+title: Hubert Lin
 paginate: 5
 theme: "PaperMod"
 
@@ -13,6 +13,17 @@ googleAnalytics:
 minify:
   disableXML: true
   minifyOutput: true
+
+menu:
+  main:
+    - identifier: posts
+      name: Posts
+      url: /posts
+      weight: 10
+    - identifier: Projects
+      name: Projects
+      url: /index
+      weight: 20
 
 params:
   env: production
@@ -42,3 +53,17 @@ params:
     threshold: 0.4
     minMatchCharLength: 0
     keys: ["title", "permalink", "summary", "content"]
+  
+  profileMode:
+    enabled: true
+    title: "Hubert Lin"
+    subtitle: "This is subtitle"
+    imageUrl: "<image link>" # optional
+    imageTitle: "<title of image as alt>" # optional
+    imageWidth: 120 # custom size
+    imageHeight: 120 # custom size
+    buttons:
+      - name: Posts
+        url: "/posts"
+      - name: Github
+        url: "https://github.com/linhub15"
