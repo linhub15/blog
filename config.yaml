@@ -20,10 +20,10 @@ menu:
       name: Posts
       url: /posts
       weight: 10
-    - identifier: Projects
-      name: Projects
-      url: /index
-      weight: 20
+    # - identifier: Projects
+    #   name: Projects
+    #   url: /index
+    #   weight: 20
 
 params:
   env: production
@@ -57,9 +57,9 @@ params:
   profileMode:
     enabled: true
     title: "Hubert Lin"
-    subtitle: "This is subtitle"
-    imageUrl: "<image link>" # optional
-    imageTitle: "<title of image as alt>" # optional
+    subtitle: "Software Developer"
+    imageUrl: "" # optional
+    imageTitle: "" # optional
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
     buttons:
