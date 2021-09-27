@@ -9,6 +9,7 @@ buildFuture: false
 buildExpired: false
 
 googleAnalytics: 
+disqusShortname: "hubertlin"
 
 minify:
   disableXML: true
@@ -38,7 +39,7 @@ params:
   ShowReadingTime: true
   ShowShareButtons: false
   # disableSpecial1stPost: false
-  # comments: false
+  comments: true
   # hidemeta: false
   # showtoc: false
   # tocopen: false

@@ -1,5 +1,5 @@
 ---
-title: 'UX case study for log in and sign in buttons'
+title: 'UX case study for log in and sign up buttons'
 date: 2021-09-26T00:00:00-07:00
 tags: ['UX']
 author: 'Hubert Lin'
@@ -7,7 +7,7 @@ showToc: false
 TocOpen: false
 draft: false
 hidemeta: false
-comments: false
+comments: true
 description: ''
 disableHLJS: false # to disable highlightjs
 disableShare: false
