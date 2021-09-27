@@ -67,21 +67,24 @@ We will look at 10 common social media websites and 10 web developer websites an
 * `Create ...` or similar - 3
 * remaining terms are all unique
 
-It appears that the results for authentication lean slightly towards `Log in` while `Sign in` is a very close second option.
+It appears that the results for authentication lean slightly towards the wording `Log in` while `Sign in` is a very close second option.
 For registration, `Sign up` is the clear winner. Other options vary, but `Create ...` seems to be the next most viable.
 
-If `Sign up` is chosen for registration, then it would be logical to avoid `Sign in` as those can easily be confused.
-Although styling the buttons differently may help distinguish `Sign in` & `Sign up` only differ by one letter so it is easy to mistake.
+If `Sign up` is chosen for registration, then it would be logical to avoid `Sign in` because they are so similar.
+Although styling the buttons differently may help distinguish `Sign in` & `Sign up`, they only differ by one letter so it is easy to mistake.
 
-As for registration, most occurences of `Create ...`  happen when the action is displayed in the Landing page, and not the nav.
-Since the nav often contains many items, `Create ...` may take up too much horizontal space. Having succinct terms for the nav would reduce visual clutter.
+As for registration, most occurences of `Create ...`  happen when the action is displayed in the Landing page, not the nav.
+Since the nav often contains many items, using `Create ...` may take up too much horizontal space. Having succinct terms for the nav would reduce visual clutter.
 
 ### Rules
 * use `Sign Up` for registration by default.
 * use `Log In` for authentication by default.
 * accent the registration button `Sign Up` with a border or background color.
-* `Create Account` or variation is permitted for registration if there is enough horizontal space. Preferrably on a landing page form.
-* `Sign In` is only permitted for authentication if `Sign Up` is not used for registration.
+* position `Log In` and `Sign Up` buttons on the top right of the page. Preferably on the top nav bar.
+* position `Log In` before `Sign Up`.
+* using `Create Account` or a variation is permitted for registration if there is enough horizontal space. Preferably on a landing page form.
+* using `Sign In` is only permitted for authentication if `Sign Up` is not used for registration.
+
 
 
 ## Screenshots
@@ -107,23 +110,23 @@ Since the nav often contains many items, `Create ...` may take up too much horiz
 ![reddit](imgs/reddit-auth.png)
 
 ## Developer Sites
-### Github github.com
+### Github
 ![github](imgs/github-auth.png)
-### Gitlab about.gitlab.com
+### Gitlab
 ![gitlab](imgs/gitlab-auth.png)
-### Google Developers developers.google.com
+### Google Developers
 ![google-devs](imgs/google-devs-auth.png)
-### Amazon Web Services (AWS) aws.amazon.com
+### Amazon Web Services (AWS)
 ![aws](imgs/aws-auth.png)
-### Microsoft Azure azure.microsoft.com
+### Microsoft Azure
 ![azure](imgs/azure-auth.png)
-### Cloudflare cloudflare.com
+### Cloudflare
 ![cloudflare](imgs/cloudflare-auth.png)
-### Digital Ocean digitalocean.com
+### Digital Ocean
 ![digital-ocean](imgs/digital-ocean-auth.png)
-### Go Daddy godaddy.com
+### Go Daddy
 ![godaddy](imgs/godaddy-auth.png)
-### NPM npmjs.com
+### NPM
 ![npmjs](imgs/npmjs-auth.png)
-### Codepen codepen.io
+### Codepen
 ![codepen](imgs/codepen-auth.png)
