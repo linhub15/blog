@@ -13,11 +13,11 @@ disableHLJS: false # to disable highlightjs
 disableShare: false
 searchHidden: false
 cover:
-  image: '<image path/url>' # image path/url
-  alt: '<alt text>' # alt text
-  caption: '<text>' # display caption under cover
-  relative: false # when using page bundles set this to true
-  hidden: true # only hide on current single page
+  image: 'imgs/post-cover.png' # image path/url
+  alt: 'UX Case Study Log In Sign Up Buttons' # alt text
+  caption: '' # display caption under cover
+  relative: true # when using page bundles set this to true
+  hidden: false # only hide on current single page
 ---
 
 If you're like me, then you've tried to log into a website and got confused with which button to click. The placement, terminology and styling often throws me off. For authentication we often see `log in`, `sign in` and for registration words like `sign up` or `create account`.
