@@ -14,4 +14,4 @@ git submodule update --remote --merge
 ```
 
 ## New Post
-`hugo new /posts/<post-name>`
+`hugo new posts/<post-name>.md`
