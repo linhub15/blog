@@ -1,36 +1,38 @@
 ---
-title: 'Not doing is still a strategy of doing'
-date: 2022-01-21T00:00:00-07:00
-tags: ['']
+title: 'Strategy Pattern and Null Object Pattern'
+date: 2022-01-24T00:00:00-07:00
+tags: ['design-patterns']
 author: 'Hubert Lin'
 showToc: false
 TocOpen: false
-draft: true
+draft: false
 hidemeta: false
 comments: true
-description: 'A scenario based walk through on implementing two software design patterns. The Strategy Pattern and Null Object pattern'
+description: 'A C# implementation of the Strategy and Null Object pattern.'
 disableHLJS: false # to disable highlightjs
 disableShare: false
 searchHidden: false
 cover:
-  image: '<image path/url>' # image path/url
+  image: 'imgs/post-cover.png' # image path/url
   alt: '<alt text>' # alt text
   caption: '<text>' # display caption under cover
   relative: true # when using page bundles set this to true
   hidden: false # only hide on current single page
 ---
 
-Most of the code I write is automating business processes. If something, then do something.
-As a programmer I tell the computer what to do under specific conditions, and sometimes
-those conditions change. Figuring out whether or not what I'm doing is right or wrong,
-can be paralyzing because who knows what new requirements will come.
+Most of the code I've been writing is automating business processes.
+As a programmer I tell the computer what to do under specific conditions, and often
+those conditions change. Trying to make correct decisions
+can be paralyzing because it's hard to know what new requirements will come.
 
 Thank goodness for software design patterns.
 
+Software design patterns can help write code that is resilient to future change.
 Here's my take on the Strategy Pattern and the Null Object Pattern.
 
+Let's go through a typical request from the business.
 My example begins with a payroll app.
-The application handles paying employees and their benefits.
+The application handles paying employees and deducting their benefits.
 It looks like this:
 
 - `Employee` model that's persisted to the database
@@ -77,18 +79,19 @@ public interface IHumanResourcesGateway
 [HttpPost("payments")]
 public IActionResult Pay(Employee employee)
 {
-  paymentService.Pay(employee); // paymentService is injected in the constructor
+  _paymentService.Pay(employee); // _paymentService is injected in the constructor
   return Ok();
 }
 ```
 
-## Requirement 1: Add support to pay part-time employees
+## Requirement 1: Pay part-time employees
 
-Okay now that we have the app up and running, the business has a new requirement.
-The system needs to handle part-time employees. They get paid, but receive benefits.
+Now that we have the app up and running, the business has a new requirement.
+The system needs to handle part-time employees. Part-time employees also get paid,
+but do not receive benefits.
 
-Okay, simple, I know I'll need to differentiate the type of employment for each employee
-so let's add an enum for `EmploymentType`.
+Seems simple. One approach is to differentiate the type of employment to allow us to
+figure out how to handle their payment, so let's add an `enum` called `EmploymentType`.
 
 ```csharp
 // EmploymentType.cs
@@ -114,7 +117,7 @@ public class Employee
 ```
 
 Great, now let's conditionally change the `Pay(...)` method based on the type.
-The quick and simple solution would be to add an `if` statement.
+The quick and simple solution would be to add an `if` condition.
 
 ```csharp
 // PaymentService.cs
@@ -132,8 +135,7 @@ public void Pay(Employee employee)
 }
 ```
 
-This a little verbose but it works. This is a good place to
-figure out if I need to refactor.
+This a little verbose but it works. Let's figure out if I need to refactor.
 
 > 1. Can I unit test the condition separate from the behavior?
 > 2. Will there be changes to the condition?
@@ -144,19 +146,21 @@ I cannot unit test the conditions separate from the behaviors.
 
 And even worse, now that we introduced types it won't be long before some other part of the system
 will depend on checking the `EmploymentType`. The same `if` condition will be duplicated.
+It would be nice to have solid test cases that can test the conditions separate from
+the behavior. That would allow us to have confidence in our future changes.
 
-I don't know about you but I've seen this a lot, and I mean A LOT!
+I've seen this type of solution a lot, and I mean A LOT!
 This is fine in small applications, but in enterprise applications,
-it's just a matter of time before an "oops".
+it's just a matter of time before an "oops", especially because it's hard to test.
 
 Let's refactor.
 
 ### Strategy Pattern
 
-I know there are two types payments, full-time and part-time, so I'll call these strategies.
+There are two types of payments, full-time and part-time, I can consider each of these payments as a strategy.
 Remember, strategies are just different implementations of the same action.
 They take in the same parameters and return the same type, but what they do inside is the difference.
-I'll start with defining the strategy `IPaymentStrategy` interface.
+I'll start with defining the `IPaymentStrategy` interface.
 
 ```csharp
 public interface IPaymentStrategy
@@ -166,7 +170,7 @@ public interface IPaymentStrategy
 ```
 
 Now I can implement the strategy for full-time and part-time.
-I basically moved the contents of the original `if` blocks into each strategies.
+I basically moved the contents of the original `if` blocks into each concrete strategy.
 
 ```csharp
 public class FullTimePay : IPaymentStrategy
@@ -187,10 +191,11 @@ public class PartTimePay : IPaymentStrategy
 }
 ```
 
-Next, we need a way to select the correct strategy. If we had complex
-logic I would use a `PaymentStrategyContext` to place the conditional logic,
-but in this case I'm just checking the `EmploymentType`. A dictionary will be perfect `Dictionary<EmploymentType, IPaymentStrategy>`.
-I'll store it in the `PaymentService` for simplicity.
+Next, I need a way to select the correct strategy. If there is complex
+logic I could use a `PaymentStrategyContext` class to place the conditional logic,
+but in this case I'm just checking the `EmploymentType`, which is a single field,
+so a dictionary will work fine. I'll store the dictionary in the `PaymentService` class 
+for now.
 
 ```csharp
 // PaymentService.cs
@@ -202,8 +207,9 @@ private Dictionary<EmploymentType, IPaymentStrategy>
 }
 ```
 
-Finally I can update our service to use the strategies.
-Say goodbye to `if` statements!
+Finally, I can update our service to use the newly created strategies.
+
+Say goodbye to the `if` condition!
 
 ```csharp
 // PaymentService.cs
@@ -218,14 +224,13 @@ Is this actually helpful?
 
 If the system never changes again then we wasted our time.
 
-The strategy design pattern prevents duplication of conditional logic and helps us to follow DRY: Don't Repeat Yourself. By consolidating the conditional behavior into one place, I can easily add new behaviors and modify conditions.
+The strategy pattern prevents duplication of conditional logic and helps us to follow DRY: Don't Repeat Yourself. By consolidating the conditional behavior into one place, I can easily add new behaviors and modify conditions.
 Also, I can now unit test the conditions separately from the behavior.
 
-## Requirement 2: Our company has Volunteers now
+## Requirement 2: "Pay" those Volunteers
 
 Now the business is interested in hiring some volunteers. The thing about volunteers
-is they don't get paid and they don't get benefits. I do not want to write an
-entire code path just for volunteers that don't get paid.
+is that, they receive no pay and no benefits. Let's first add to our `EmployementType`.
 
 ```csharp
 // EmploymentType.cs
@@ -237,18 +242,19 @@ public enum EmploymentType
 }
 ```
 
-We could just add an `if` statement that checks their type but now we're back where we started.
+One option is to just add the `if` condition that checks their type but that's the same as before.
+We don't want to do that.
 
 ```csharp
 // PaymentService.cs
 public void Pay(Employee employee)
 {
-  if (employee.Type != EmploymentType.Volunteer)
+  if (employee.Type != EmploymentType.Volunteer) // <-- BAD
     _paymentStrategies[employee.Type].Pay(employee, _hr);
 }
 ```
 
-Instead, I'll keep going with the strategy pattern take it a step further.
+Instead, I'll take the strategy pattern a step further.
 Let's define a strategy for when someone doesn't get paid.
 
 ### Null Object Pattern
@@ -265,7 +271,7 @@ public class NoPay : IPaymentStrategy
 }
 ```
 
-I add it to dictionary of payment strategies, and the rest of the code will just work.
+I add it to the dictionary of payment strategies, and the rest of the code just works.
 
 ```csharp
 // PaymentService.cs
@@ -280,12 +286,35 @@ private Dictionary<EmploymentType, IPaymentStrategy>
 
 ## Summary
 
-The bigger an application grows the easier it is to duplicate conditional logic. In the case of conditional behavior, we can leverage the **Strategy Pattern** and the **Null Object Pattern** to help with managing change. This makes it easier to add and modify behavior to adapt throughout the system.
+The bigger an application grows the easier it is to duplicate conditional logic.
+In the case of conditional behavior, we can leverage the **Strategy Pattern** and the **Null Object Pattern** to help with managing change. This makes it easier to add and modify behavior to adapt throughout the system.
 
-One bonus from these patterns is that we can now isolate the unit tests of condition from behavior. We can write tests for each strategy and if the conditional logic moves from the `Dictionary<Key,Strategy>` to a `StrategyContext.GetStrategy()` with `if` statements, we can also unit test that `StrategyContext.GetStrategy()` method to ensure it returns the intended strategy.
+A bonus is that we can separate the testing of condition from testing of behavior.
+In our example we did not need to unit test the dictionary, but when the
+conditional logic in the `Dictionary<Key,Strategy>` becomes more complex we can move it to a context class.
+Then we can unit test the `GetStrategy(...)` method on its own.
+The context will be the single source of truth for selecting concrete `IPaymentStrategy`.
+
+```
+// PaymentStrategyContext.cs
+public class PaymentStrategyContext
+{
+  public IPaymentStrategy GetStrategy(Employee employee)
+  {
+    if (...)
+      return new FullTime();
+    else if (...)
+      return new PartTime();
+    else
+      return new NoPay();
+  }
+}
+```
 
 So many videos, blogs, and readings have helped me grow my understanding of these patterns.
-I am no way an expert at thse patterns and am just getting started.
+I am not an expert at these patterns, so I apprectiate your feedback.
+
+Thanks for reading!
 
 ## References
 
