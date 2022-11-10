@@ -18,7 +18,7 @@ minify:
 menu:
   main:
     - identifier: posts
-      name: Posts
+      name: Blog Posts
       url: /posts
       weight: 10
     # - identifier: Projects
@@ -64,7 +64,13 @@ params:
     imageWidth: 120 # custom size
     imageHeight: 120 # custom size
     buttons:
-      - name: Posts
+      - name: Blog Posts
         url: "/posts"
-      - name: Github
-        url: "https://github.com/linhub15"
+
+  socialIcons:
+    - name: "twitter"
+      url: "https://twitter.com/linhub15"
+    - name: "github"
+      url: "https://github.com/linhub15"
+    - name: "linkedin"
+      url: "https://linkedin.com/in/linhub"
