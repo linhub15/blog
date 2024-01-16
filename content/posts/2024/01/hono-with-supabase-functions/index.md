@@ -13,11 +13,11 @@ disableHLJS: false # to disable highlightjs
 disableShare: false
 searchHidden: false
 cover:
-  image: '' # image path/url
-  alt: '' # alt text
+  image: 'post-cover.png' # image path/url
+  alt: 'Hono logo and supabase logo' # alt text
   caption: '' # display caption under cover
   relative: true # when using page bundles set this to true
-  hidden: true # only hide on current single page
+  hidden: false # only hide on current single page
 ---
 
 [Hono](https://hono.dev) is a strongly typed middleware webserver that runs on
