@@ -1,7 +1,7 @@
 ---
 title: "UX Case Study on Form Actions"
 date: 2021-10-27T00:00:00-07:00
-tags: ["UX"]
+tags: ["ux"]
 author: "Hubert Lin"
 showToc: false
 TocOpen: false

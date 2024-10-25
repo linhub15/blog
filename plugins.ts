@@ -52,6 +52,7 @@ export default function (userOptions?: Options) {
           extensions: [".html", ".vto"],
           options: {
             plugins: [typography],
+            darkMode: "selector",
           },
         }),
       )

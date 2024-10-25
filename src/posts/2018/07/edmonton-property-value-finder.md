@@ -5,6 +5,7 @@ tags:
 author: "Hubert Lin"
 showToc: false
 TocOpen: false
+toc: false
 draft: false
 hidemeta: false
 comments: false

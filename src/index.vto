@@ -6,39 +6,5 @@ title: Home
 
 {{ comp Page_Header }}
   <h1 class="text-5xl py-4">{{ home.welcome }}</h1>
-
-  <div class="mt-4" id="search"></div>
 {{ /comp }}
 
-<section class="postList">
-  {{ for post of search.pages("type=post", "date=desc", 1) }}
-  <article>
-    <header class="py-2">
-      <h2 class="text-2xl">
-        <a href="{{ post.url }}" {{ if post.url == url }} aria-current="page"{{ /if }}>
-          {{ post.title || post.url }}
-        </a>
-      </h2>
-
-      {{ include "templates/post-details.vto" {
-        date: post.date,
-        tags: post.tags,
-        author: post.author,
-        readingInfo: post.readingInfo
-        } }}
-    </header>
-
-    <div class="prose dark:prose-invert max-h-96 h-full truncate text-ellipsis">
-      {{ post.excerpt |> md }}
-    </div>
-
-    <a href="{{ post.url }}" class="inline-block my-4">
-      {{ i18n.nav.continue_reading }}
-    </a>
-  </article>
-{{ /for }}
-</section>
-
-<div class="my-12 h-0.5 bg-gray-100">
-
-<p class="py-16">{{ i18n.nav.posts }}</p>
