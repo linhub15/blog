@@ -2,9 +2,9 @@
 layout: layouts/base.vto
 bodyClass: body-tag
 ---
-<header class="page-header">
+{{ comp Page_Header }}
   <p><a href="/posts/">{{ i18n.nav.back }}</a></p>
-  <h1 class="page-title">{{ title }}</h1>
-</header>
+  <h1 class="text-5xl py-4">{{ title }}</h1>
+{{ /comp }}
 
 {{ include "templates/post-list.vto" { postslist: search.pages(search_query) } }}

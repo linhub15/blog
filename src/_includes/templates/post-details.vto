@@ -1,13 +1,14 @@
-<div class="post-details">
-  {{ if author }}
-    {{ set page = search.page(`type=author author="author"`) }}
-    {{ if page }}
-      <p>{{ i18n.post.by}} <a data-pagefind-filter="author" href="{{ page.url }}">{{ author }}</a></p>
-    {{ else }}
-      <p>{{ i18n.post.by}} {{ author }}</p>
-    {{ /if }}
-  {{ /if }}
+<style>
+  .divider-dot {
+    & p:nth-child(-n+1)::after {
+      content: "•";
+      padding-left: .5em;
+      align-self: stretch;
+    }
+  }
+</style>
 
+<div class="py-2 flex gap-3 text-sm text-[--color-dim] items-center divider-dot">
   <p>
     <time datetime="{{ date |> date('DATETIME') }}">
       {{ date |> date('HUMAN_DATE') }}
@@ -16,7 +17,7 @@
 
   <p>{{ it.readingInfo.minutes }} {{ i18n.post.reading_time}}</p>
 
-  <div class="post-tags">
+  <div class="flex items-center gap-2">
     {{ for tag of tags }}
       {{ set page = search.page(`type=tag tag="${tag}"`) }}
 

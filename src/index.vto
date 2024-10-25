@@ -4,17 +4,17 @@ bodyClass: body-home
 title: Home
 ---
 
-<header class="page-header">
-  <h1 class="page-title">{{ home.welcome }}</h1>
+{{ comp Page_Header }}
+  <h1 class="text-5xl py-4">{{ home.welcome }}</h1>
 
-  <div class="search" id="search"></div>
-</header>
+  <div class="mt-4" id="search"></div>
+{{ /comp }}
 
 <section class="postList">
-  {{ for post of search.pages("type=post", "date=desc", 3) }}
-  <article class="post">
-    <header class="post-header">
-      <h2 class="post-title">
+  {{ for post of search.pages("type=post", "date=desc", 1) }}
+  <article>
+    <header class="py-2">
+      <h2 class="text-2xl">
         <a href="{{ post.url }}" {{ if post.url == url }} aria-current="page"{{ /if }}>
           {{ post.title || post.url }}
         </a>
@@ -28,17 +28,17 @@ title: Home
         } }}
     </header>
 
-    <div class="post-excerpt body">
+    <div class="prose dark:prose-invert max-h-96 h-full truncate text-ellipsis">
       {{ post.excerpt |> md }}
     </div>
 
-    <a href="{{ post.url }}" class="post-link">
+    <a href="{{ post.url }}" class="inline-block my-4">
       {{ i18n.nav.continue_reading }}
     </a>
   </article>
 {{ /for }}
 </section>
 
-<hr>
+<div class="my-12 h-0.5 bg-gray-100">
 
-<p>{{ i18n.nav.posts }}</p>
+<p class="py-16">{{ i18n.nav.posts }}</p>

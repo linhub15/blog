@@ -1,4 +1,6 @@
 import date, { type Options as DateOptions } from "lume/plugins/date.ts";
+import tailwindcss from "lume/plugins/tailwindcss.ts";
+import typography from "npm:@tailwindcss/typography";
 import postcss from "lume/plugins/postcss.ts";
 import terser from "lume/plugins/terser.ts";
 import prism, { type Options as PrismOptions } from "lume/plugins/prism.ts";
@@ -6,7 +8,9 @@ import basePath from "lume/plugins/base_path.ts";
 import slugifyUrls from "lume/plugins/slugify_urls.ts";
 import resolveUrls from "lume/plugins/resolve_urls.ts";
 import metas from "lume/plugins/metas.ts";
-import pagefind, { type Options as PagefindOptions } from "lume/plugins/pagefind.ts";
+import pagefind, {
+  type Options as PagefindOptions,
+} from "lume/plugins/pagefind.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import feed, { type Options as FeedOptions } from "lume/plugins/feed.ts";
 import readingInfo from "lume/plugins/reading_info.ts";
@@ -43,6 +47,14 @@ export default function (userOptions?: Options) {
 
   return (site: Lume.Site) => {
     site
+      .use(
+        tailwindcss({
+          extensions: [".html", ".vto"],
+          options: {
+            plugins: [typography],
+          },
+        }),
+      )
       .use(postcss())
       .use(basePath())
       .use(toc())
@@ -58,7 +70,7 @@ export default function (userOptions?: Options) {
       .use(pagefind(options.pagefind))
       .use(sitemap())
       .use(feed(options.feed))
-      .copy([".jpg", ".jpeg", ".png", ".svg", ".webp"],)
+      .copy([".jpg", ".jpeg", ".png", ".svg", ".webp", ".ico"])
       .mergeKey("extra_head", "stringArray")
       .preprocess([".md"], (pages) => {
         for (const page of pages) {

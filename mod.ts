@@ -10,7 +10,6 @@ export default function (options: Partial<Options> = {}) {
     // Add remote files
     const files = [
       "_includes/css/fonts.css",
-      "_includes/css/navbar.css",
       "_includes/css/page.css",
       "_includes/css/post-list.css",
       "_includes/css/post.css",
@@ -18,7 +17,6 @@ export default function (options: Partial<Options> = {}) {
       "_includes/css/badge.css",
       "_includes/css/variables.css",
       "_includes/css/search.css",
-      "_includes/css/comments.css",
       "_includes/layouts/base.vto",
       "_includes/layouts/page.vto",
       "_includes/layouts/post.vto",
@@ -34,7 +32,7 @@ export default function (options: Partial<Options> = {}) {
       "posts.page.js",
       "index.vto",
       "styles.css",
-      "favicon.png",
+      "favicon.ico",
     ];
 
     for (const file of files) {

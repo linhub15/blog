@@ -13,13 +13,13 @@
     <link rel="stylesheet" href="/styles.css">
     <link rel="alternate" href="/feed.xml" type="application/atom+xml" title="{{ metas.site }}">
     <link rel="alternate" href="/feed.json" type="application/json" title="{{ metas.site }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
     <link rel="canonical" href="{{ url |> url(true) }}">
     {{ it.extra_head?.join("\n") }}
   </head>
   <body>
-    <nav class="navbar">
-      <a href="/" class="navbar-home">
+    <nav class="flex flex-wrap gap-4 justify-between py-8 px-[min(5vw,_5rem)] items-center">
+      <a href="/">
         {{ if it.logo }}
           {{ it.logo }}
         {{ else }}
@@ -27,7 +27,7 @@
         {{ /if }}
       </a>
 
-      <ul class="navbar-links">
+      <ul class="flex flex-wrap gap-6 font-medium items-center">
       {{- for entry of search.pages("menu.visible=true", "menu.order") }}
         <li>
           <a href="{{ entry.url }}"{{ if entry.url == url }} aria-current="page"{{ /if }}>
@@ -47,11 +47,24 @@
           let theme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches
             ? "dark"
             : "light");
-          document.documentElement.dataset.theme = theme;
+          
+          function toggleDark() {
+            if (theme === "dark") {
+              htmlTag.classList.add("dark");
+            } else {
+              htmlTag.classList.remove("dark");
+            }
+          }
+
+          const htmlTag = document.documentElement;
+          htmlTag.dataset.theme = theme;
+          toggleDark();
+
           function changeTheme() {
             theme = theme === "dark" ? "light" : "dark";
             localStorage.setItem("theme", theme);
-            document.documentElement.dataset.theme = theme;
+            htmlTag.dataset.theme = theme;
+            toggleDark();
           }
         </script>
         <button class="button" onclick="changeTheme()">
