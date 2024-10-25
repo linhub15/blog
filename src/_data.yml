@@ -1,0 +1,12 @@
+lang: en
+home:
+  welcome: Hey there! Sometimes I write here.
+menu_links: []
+metas:
+  site: Hubert Lin
+  description: Hubert's blogs and projects
+  title: =title
+  image: =image
+  twitter: '@username'
+  lang: en
+  generator: false

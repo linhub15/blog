@@ -12,18 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-        fetch-depth: 0
+    - uses: actions/checkout@v4
 
-    - uses: peaceiris/actions-hugo@v2
+    - uses: denoland/setup-deno@v2
       with:
-        hugo-version: '0.119.0'
-        extended: true
-
-    - name: Build
-      run: hugo --minify
+        deno-version: v2.x
 
     - name: Deploy
       uses: sebastianpopp/ftp-action@releases/v2
@@ -31,4 +24,4 @@ jobs:
         host: ${{ secrets.FTP_SERVER }}
         user: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        localDir: "public"
+        localDir: "_site"

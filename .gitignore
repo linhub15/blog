@@ -1,5 +1,2 @@
-/public
-/resources/_gen/
-hugo_stats.json
-
-.hugo_build.lock
+_site
+src/uploads/
