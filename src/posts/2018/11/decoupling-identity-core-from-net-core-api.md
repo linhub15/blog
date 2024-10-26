@@ -20,11 +20,22 @@ cover:
   hidden: true # only hide on current single page
 ---
 
-During my quest to make my architecture "clean" there was a huge dependency that needed to be inverted `Microsoft.AspNetCore.Identity`. Even though many applications require authentication, we still shouldn't be depending on any authentication frameworks.
+During my quest to make my architecture "clean" there was a huge dependency that
+needed to be inverted `Microsoft.AspNetCore.Identity`. Even though many
+applications require authentication, we still shouldn't be depending on any
+authentication frameworks.
 
-According to Robert C. Martin we shouldn't depend on a framework because the business rules can change or the frameworks can change. We keep things loosely coupled so that in case we need to swap out an implementation we can do so without affecting our business rules.
+According to Robert C. Martin we shouldn't depend on a framework because the
+business rules can change or the frameworks can change. We keep things loosely
+coupled so that in case we need to swap out an implementation we can do so
+without affecting our business rules.
 
-At first, my code following typical ASP.NET Core folder structure: Models, Controllers etc. I had the authentication logic in my `AuthenticationController.cs`, so that's where I injected `UserManager<TUser>` and `SignInManager<TUser>`. Just in case you're not familiar with Identity Core, those two managers help us handle users and signing them in. The `TUser` is a class of user, e.g. `IdentityUser` is the Microsoft User class.
+At first, my code following typical ASP.NET Core folder structure: Models,
+Controllers etc. I had the authentication logic in my
+`AuthenticationController.cs`, so that's where I injected `UserManager<TUser>`
+and `SignInManager<TUser>`. Just in case you're not familiar with Identity Core,
+those two managers help us handle users and signing them in. The `TUser` is a
+class of user, e.g. `IdentityUser` is the Microsoft User class.
 
 The newly decoupled project layout follows this folder structure:
 
@@ -36,7 +47,9 @@ The newly decoupled project layout follows this folder structure:
 
 #### 1. Define authentication methods
 
-We need to `Register` and `SignIn` a user. I didn't include a ***sign out*** because I will be using JSON Web tokens and they will have a short expiry date. It's not secure so don't do this in a real application.
+We need to `Register` and `SignIn` a user. I didn't include a _**sign out**_
+because I will be using JSON Web tokens and they will have a short expiry date.
+It's not secure so don't do this in a real application.
 
 ```csharp
 public interface IAuthenticator
@@ -48,7 +61,8 @@ public interface IAuthenticator
 
 #### 2. Define User Class
 
-Next, we'll need to define the `User` object that we're passing into Register. In my case I only have 3 fields. User name, email, and password.
+Next, we'll need to define the `User` object that we're passing into Register.
+In my case I only have 3 fields. User name, email, and password.
 
 ```csharp
 public class User
@@ -61,10 +75,13 @@ public class User
 
 #### 3. Implement IAuthenticator in Infrastructure
 
-In the infrastructure layer, we create an Authenticator to implement the IAuthenticator interface. This is where we include dependencies on Microsoft.AspNetCore.Identity as well as all other dependencies we will be using.
+In the infrastructure layer, we create an Authenticator to implement the
+IAuthenticator interface. This is where we include dependencies on
+Microsoft.AspNetCore.Identity as well as all other dependencies we will be
+using.
 
-* Use dependency injection for any required objects / services / managers... etc
-* Include helper method to generate JSON Web Token
+- Use dependency injection for any required objects / services / managers... etc
+- Include helper method to generate JSON Web Token
 
 ```csharp
 public class Authenticator : IAuthenticator
@@ -112,10 +129,11 @@ public class Authenticator : IAuthenticator
 }
 ```
 
-*\*key, expiry date, and JwtIssuer should be included in an application config file*
+_\*key, expiry date, and JwtIssuer should be included in an application config
+file_
 
-* Implement Register()
-* Implement SignIn()
+- Implement Register()
+- Implement SignIn()
 
 ```csharp
 public IdentityResult Register(User user)
@@ -145,7 +163,8 @@ public string SignIn(string userName, string password)
 
 #### 4. Use the Authenticator in our API Controller
 
-With the implementation complete we can pass in our Authenticator instance with dependency injection into the controller.
+With the implementation complete we can pass in our Authenticator instance with
+dependency injection into the controller.
 
 ```csharp
 [Route("api/[Controller]/[Action]")]
@@ -177,4 +196,5 @@ public class AuthenticationController : ControllerBase
 ```
 
 This code refactoring was inspired by "Clean Architecture" by Robert C. Martin.
-I'm still pretty new at software design and programming so feel free to offer suggestions and point out any errors you find.
+I'm still pretty new at software design and programming so feel free to offer
+suggestions and point out any errors you find.

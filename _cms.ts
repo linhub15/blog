@@ -71,7 +71,6 @@ cms.document(
       description: "Meta tags configuration.",
       fields: [
         "site: text",
-        "description: text",
         "title: text",
         "image: text",
         "twitter: text",

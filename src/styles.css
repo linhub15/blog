@@ -1,7 +1,6 @@
 /* Lume's design system */
 @import "https://unpkg.com/@lumeland/ds@0.5.2/ds.css";
 
-
 /* Make the links black */
 :root {
   --color-link: var(--color-base);
@@ -18,7 +17,6 @@ main {
     margin-top: 0;
   }
 }
-
 
 @tailwind base;
 @tailwind components;

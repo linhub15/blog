@@ -20,6 +20,7 @@ cover:
   hidden: false # only hide on current single page
 ---
 
-You open a form, type in your new email address, and you see a button with rounded corners and bright color.
-Maybe the button text is `save` or `submit` but it's a verb and you know that clicking the button will persist your new email.
-It probably looks something like this 
+You open a form, type in your new email address, and you see a button with
+rounded corners and bright color. Maybe the button text is `save` or `submit`
+but it's a verb and you know that clicking the button will persist your new
+email. It probably looks something like this

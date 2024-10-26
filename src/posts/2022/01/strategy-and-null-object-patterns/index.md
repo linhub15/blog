@@ -20,20 +20,19 @@ cover:
   hidden: false # only hide on current single page
 ---
 
-Most of the code I've been writing is automating business processes.
-As a programmer I tell the computer what to do under specific conditions, and often
-those conditions change. Trying to make correct decisions
-can be paralyzing because it's hard to know what new requirements will come.
+Most of the code I've been writing is automating business processes. As a
+programmer I tell the computer what to do under specific conditions, and often
+those conditions change. Trying to make correct decisions can be paralyzing
+because it's hard to know what new requirements will come.
 
 Thank goodness for software design patterns.
 
 Software design patterns can help write code that is resilient to future change.
 Here's my take on the Strategy Pattern and the Null Object Pattern.
 
-Let's go through a typical request from the business.
-My example begins with a payroll app.
-The application handles paying employees and deducting their benefits.
-It looks like this:
+Let's go through a typical request from the business. My example begins with a
+payroll app. The application handles paying employees and deducting their
+benefits. It looks like this:
 
 - `Employee` model that's persisted to the database
 - `PaymentService` that has our business logic
@@ -86,12 +85,13 @@ public IActionResult Pay(Employee employee)
 
 ## Requirement 1: Pay part-time employees
 
-Now that we have the app up and running, the business has a new requirement.
-The system needs to handle part-time employees. Part-time employees also get paid,
+Now that we have the app up and running, the business has a new requirement. The
+system needs to handle part-time employees. Part-time employees also get paid,
 but do not receive benefits.
 
-Seems simple. One approach is to differentiate the type of employment to allow us to
-figure out how to handle their payment, so let's add an `enum` called `EmploymentType`.
+Seems simple. One approach is to differentiate the type of employment to allow
+us to figure out how to handle their payment, so let's add an `enum` called
+`EmploymentType`.
 
 ```csharp
 // EmploymentType.cs
@@ -141,26 +141,28 @@ This a little verbose but it works. Let's figure out if I need to refactor.
 > 2. Will there be changes to the condition?
 > 3. Will there be changes to the behavior?
 
-I don't know if there are future changes coming, but I do know that
-I cannot unit test the conditions separate from the behaviors.
+I don't know if there are future changes coming, but I do know that I cannot
+unit test the conditions separate from the behaviors.
 
-And even worse, now that we introduced types it won't be long before some other part of the system
-will depend on checking the `EmploymentType`. The same `if` condition will be duplicated.
-It would be nice to have solid test cases that can test the conditions separate from
-the behavior. That would allow us to have confidence in our future changes.
+And even worse, now that we introduced types it won't be long before some other
+part of the system will depend on checking the `EmploymentType`. The same `if`
+condition will be duplicated. It would be nice to have solid test cases that can
+test the conditions separate from the behavior. That would allow us to have
+confidence in our future changes.
 
-I've seen this type of solution a lot, and I mean A LOT!
-This is fine in small applications, but in enterprise applications,
-it's just a matter of time before an "oops", especially because it's hard to test.
+I've seen this type of solution a lot, and I mean A LOT! This is fine in small
+applications, but in enterprise applications, it's just a matter of time before
+an "oops", especially because it's hard to test.
 
 Let's refactor.
 
 ### Strategy Pattern
 
-There are two types of payments, full-time and part-time, I can consider each of these payments as a strategy.
-Remember, strategies are just different implementations of the same action.
-They take in the same parameters and return the same type, but what they do inside is the difference.
-I'll start with defining the `IPaymentStrategy` interface.
+There are two types of payments, full-time and part-time, I can consider each of
+these payments as a strategy. Remember, strategies are just different
+implementations of the same action. They take in the same parameters and return
+the same type, but what they do inside is the difference. I'll start with
+defining the `IPaymentStrategy` interface.
 
 ```csharp
 public interface IPaymentStrategy
@@ -169,8 +171,8 @@ public interface IPaymentStrategy
 }
 ```
 
-Now I can implement the strategy for full-time and part-time.
-I basically moved the contents of the original `if` blocks into each concrete strategy.
+Now I can implement the strategy for full-time and part-time. I basically moved
+the contents of the original `if` blocks into each concrete strategy.
 
 ```csharp
 public class FullTimePay : IPaymentStrategy
@@ -191,11 +193,11 @@ public class PartTimePay : IPaymentStrategy
 }
 ```
 
-Next, I need a way to select the correct strategy. If there is complex
-logic I could use a `PaymentStrategyContext` class to place the conditional logic,
-but in this case I'm just checking the `EmploymentType`, which is a single field,
-so a dictionary will work fine. I'll store the dictionary in the `PaymentService` class 
-for now.
+Next, I need a way to select the correct strategy. If there is complex logic I
+could use a `PaymentStrategyContext` class to place the conditional logic, but
+in this case I'm just checking the `EmploymentType`, which is a single field, so
+a dictionary will work fine. I'll store the dictionary in the `PaymentService`
+class for now.
 
 ```csharp
 // PaymentService.cs
@@ -224,13 +226,16 @@ Is this actually helpful?
 
 If the system never changes again then we wasted our time.
 
-The strategy pattern prevents duplication of conditional logic and helps us to follow DRY: Don't Repeat Yourself. By consolidating the conditional behavior into one place, I can easily add new behaviors and modify conditions.
-Also, I can now unit test the conditions separately from the behavior.
+The strategy pattern prevents duplication of conditional logic and helps us to
+follow DRY: Don't Repeat Yourself. By consolidating the conditional behavior
+into one place, I can easily add new behaviors and modify conditions. Also, I
+can now unit test the conditions separately from the behavior.
 
 ## Requirement 2: "Pay" those Volunteers
 
-Now the business is interested in hiring some volunteers. The thing about volunteers
-is that, they receive no pay and no benefits. Let's first add to our `EmployementType`.
+Now the business is interested in hiring some volunteers. The thing about
+volunteers is that, they receive no pay and no benefits. Let's first add to our
+`EmployementType`.
 
 ```csharp
 // EmploymentType.cs
@@ -242,8 +247,8 @@ public enum EmploymentType
 }
 ```
 
-One option is to just add the `if` condition that checks their type but that's the same as before.
-We don't want to do that.
+One option is to just add the `if` condition that checks their type but that's
+the same as before. We don't want to do that.
 
 ```csharp
 // PaymentService.cs
@@ -254,8 +259,8 @@ public void Pay(Employee employee)
 }
 ```
 
-Instead, I'll take the strategy pattern a step further.
-Let's define a strategy for when someone doesn't get paid.
+Instead, I'll take the strategy pattern a step further. Let's define a strategy
+for when someone doesn't get paid.
 
 ### Null Object Pattern
 
@@ -271,7 +276,8 @@ public class NoPay : IPaymentStrategy
 }
 ```
 
-I add it to the dictionary of payment strategies, and the rest of the code just works.
+I add it to the dictionary of payment strategies, and the rest of the code just
+works.
 
 ```csharp
 // PaymentService.cs
@@ -287,13 +293,16 @@ private Dictionary<EmploymentType, IPaymentStrategy>
 ## Summary
 
 The bigger an application grows the easier it is to duplicate conditional logic.
-In the case of conditional behavior, we can leverage the **Strategy Pattern** and the **Null Object Pattern** to help with managing change. This makes it easier to add and modify behavior to adapt throughout the system.
+In the case of conditional behavior, we can leverage the **Strategy Pattern**
+and the **Null Object Pattern** to help with managing change. This makes it
+easier to add and modify behavior to adapt throughout the system.
 
-A bonus is that we can separate the testing of condition from testing of behavior.
-In our example we did not need to unit test the dictionary, but when the
-conditional logic in the `Dictionary<Key,Strategy>` becomes more complex we can move it to a context class.
-Then we can unit test the `GetStrategy(...)` method on its own.
-The context will be the single source of truth for selecting concrete `IPaymentStrategy`.
+A bonus is that we can separate the testing of condition from testing of
+behavior. In our example we did not need to unit test the dictionary, but when
+the conditional logic in the `Dictionary<Key,Strategy>` becomes more complex we
+can move it to a context class. Then we can unit test the `GetStrategy(...)`
+method on its own. The context will be the single source of truth for selecting
+concrete `IPaymentStrategy`.
 
 ```
 // PaymentStrategyContext.cs
@@ -311,15 +320,18 @@ public class PaymentStrategyContext
 }
 ```
 
-So many videos, blogs, and readings have helped me grow my understanding of these patterns.
-I am not an expert at these patterns, so I apprectiate your feedback.
+So many videos, blogs, and readings have helped me grow my understanding of
+these patterns. I am not an expert at these patterns, so I apprectiate your
+feedback.
 
 Thanks for reading!
 
 ## References
 
-- [[Video] Nothing is Something](https://www.youtube.com/watch?v=29MAL8pJImQ) - Sandi Metz
+- [[Video] Nothing is Something](https://www.youtube.com/watch?v=29MAL8pJImQ) -
+  Sandi Metz
 - [[Video] Strategy Pattern – Design Patterns](https://www.youtube.com/watch?v=v9ejT8FO-7I&t=77s) -
   Christopher Okhravi
-- [[Book] Design Patterns: Elements of Reusable Object-Oriented Software](https://www.amazon.ca/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612) - GoF
+- [[Book] Design Patterns: Elements of Reusable Object-Oriented Software](https://www.amazon.ca/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612) -
+  GoF
 - [[Website] https://sourcemaking.com/design_patterns/strategy](https://sourcemaking.com/design_patterns/strategy)

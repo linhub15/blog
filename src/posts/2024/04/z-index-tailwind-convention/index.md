@@ -80,8 +80,7 @@ those interactive elements. Good for navbars, drawers
 Reserved for modals and drawers that have backdrops. This one needs to take over
 the whole screen and limit user interaction with the layer below.
 
-
-## z-40 
+## z-40
 
 Can be used for popups that need to cover the modal
 
