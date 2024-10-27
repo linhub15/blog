@@ -42,7 +42,7 @@ layout: layouts/base.vto
     <li>
       <a class="flex flex-col" href="{{ previousPost.url }}" rel="prev">
         <span>{{ i18n.nav.previous_post }}</span>
-        <span class="text-sm">{{ previousPost.title }}</span>
+        <span class="text-sm text-slate-600 dark:text-slate-400">{{ previousPost.title }}</span>
       </a>
     </li>
     {{ /if }}
@@ -52,7 +52,7 @@ layout: layouts/base.vto
     <li class="col-start-2">
       <a class="flex flex-col text-right" href="{{ nextPost.url }}" rel="next">
         <span>{{ i18n.nav.next_post }}</span>
-        <span class="text-sm">{{ nextPost.title }}</span>
+        <span class="text-sm text-slate-600 dark:text-slate-400">{{ nextPost.title }}</span>
       </a>
     </li>
     {{ /if }}
