@@ -17,6 +17,8 @@ jobs:
         with:
           deno-version: v2.x
 
+      - run: deno task build
+
       - name: Deploy
         uses: sebastianpopp/ftp-action@releases/v2
         with:
