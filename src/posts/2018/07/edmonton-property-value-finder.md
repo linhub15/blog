@@ -3,9 +3,6 @@ title: "Edmonton Property Value Finder"
 date: 2018-07-11T00:00:00-07:00
 tags:
 author: "Hubert Lin"
-showToc: false
-TocOpen: false
-toc: false
 draft: false
 hidemeta: false
 comments: false

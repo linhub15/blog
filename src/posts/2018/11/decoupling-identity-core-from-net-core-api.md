@@ -3,8 +3,6 @@ title: "Decoupling Identity Core from .NET Core Api"
 date: 2018-11-30T00:00:00-07:00
 tags:
 author: "Hubert Lin"
-showToc: false
-TocOpen: false
 draft: false
 hidemeta: false
 comments: false

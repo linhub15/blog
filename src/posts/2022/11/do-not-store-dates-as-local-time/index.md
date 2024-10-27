@@ -3,8 +3,6 @@ title: 'Do not store dates as local time'
 date: 2022-11-30T00:00:00-07:00
 tags: []
 author: 'Hubert Lin'
-showToc: false
-TocOpen: false
 draft: false
 hidemeta: false
 comments: true

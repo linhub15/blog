@@ -3,8 +3,6 @@ title: "Closing Bootstrap nav in Angular"
 date: 2019-01-28T00:00:00-07:00
 tags:
 author: "Hubert Lin"
-showToc: false
-TocOpen: false
 draft: false
 hidemeta: false
 comments: false
@@ -64,7 +62,7 @@ export class CloseNavDirective {
 To use the directive, place the selector name on the desired html element that
 you want to have the behavior. I put it on my div.content-wrapper.
 
-```
+```html
 <app-top-nav></app-top-nav>
 
 <!-- appCloseNav directive closes the top-nav.component -->

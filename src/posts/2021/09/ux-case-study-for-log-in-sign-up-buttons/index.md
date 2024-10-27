@@ -3,8 +3,6 @@ title: 'UX case study for log in and sign up buttons'
 date: 2021-09-26T00:00:00-07:00
 tags: ['ux']
 author: 'Hubert Lin'
-showToc: false
-TocOpen: false
 draft: false
 hidemeta: false
 comments: true

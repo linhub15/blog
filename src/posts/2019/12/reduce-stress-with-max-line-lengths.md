@@ -3,8 +3,6 @@ title: "Reduce stress with max line lengths"
 date: 2019-12-03T00:00:00-07:00
 tags:
 author: "Hubert Lin"
-showToc: false
-TocOpen: false
 draft: false
 hidemeta: false
 comments: false

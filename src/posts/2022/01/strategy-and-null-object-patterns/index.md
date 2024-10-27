@@ -3,8 +3,6 @@ title: 'Strategy Pattern and Null Object Pattern'
 date: 2022-01-24T00:00:00-07:00
 tags: ['design-patterns']
 author: 'Hubert Lin'
-showToc: false
-TocOpen: false
 draft: false
 hidemeta: false
 comments: true

@@ -3,8 +3,6 @@ title: "Things I learned from my first paid website project"
 date: 2018-09-10T00:00:00-07:00
 tags:
 author: "Hubert Lin"
-showToc: false
-TocOpen: false
 draft: false
 hidemeta: false
 comments: false

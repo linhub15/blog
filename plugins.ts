@@ -12,10 +12,8 @@ import pagefind, {
   type Options as PagefindOptions,
 } from "lume/plugins/pagefind.ts";
 import sitemap from "lume/plugins/sitemap.ts";
-import feed, { type Options as FeedOptions } from "lume/plugins/feed.ts";
 import readingInfo from "lume/plugins/reading_info.ts";
 import { merge } from "lume/core/utils/object.ts";
-import toc from "https://deno.land/x/lume_markdown_plugins@v0.7.1/toc.ts";
 import image from "https://deno.land/x/lume_markdown_plugins@v0.7.1/image.ts";
 import footnotes from "https://deno.land/x/lume_markdown_plugins@v0.7.1/footnotes.ts";
 import { alert } from "npm:@mdit/plugin-alert@0.13.1";
@@ -24,22 +22,9 @@ export interface Options {
   prism?: Partial<PrismOptions>;
   date?: Partial<DateOptions>;
   pagefind?: Partial<PagefindOptions>;
-  feed?: Partial<FeedOptions>;
 }
 
-export const defaults: Options = {
-  feed: {
-    output: ["/feed.xml", "/feed.json"],
-    query: "type=post",
-    info: {
-      title: "=metas.site",
-      description: "=metas.description",
-    },
-    items: {
-      title: "=title",
-    },
-  },
-};
+export const defaults: Options = {};
 
 /** Configure the site */
 export default function (userOptions?: Options) {
@@ -58,7 +43,6 @@ export default function (userOptions?: Options) {
       )
       .use(postcss())
       .use(basePath())
-      .use(toc())
       .use(prism(options.prism))
       .use(readingInfo())
       .use(date(options.date))
@@ -70,7 +54,6 @@ export default function (userOptions?: Options) {
       .use(terser())
       .use(pagefind(options.pagefind))
       .use(sitemap())
-      .use(feed(options.feed))
       .copy([".jpg", ".jpeg", ".png", ".svg", ".webp", ".ico"])
       .mergeKey("extra_head", "stringArray")
       .preprocess([".md"], (pages) => {

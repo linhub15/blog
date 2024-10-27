@@ -3,8 +3,6 @@ title: 'How to use the new Temporal API'
 date: 2024-01-25T00:00:00-07:00
 tags: []
 author: 'Hubert Lin'
-showToc: false
-TocOpen: false
 draft: false
 hidemeta: false
 comments: true

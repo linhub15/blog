@@ -3,8 +3,6 @@ title: "I discovered Clean Architecture by Robert C. Martin"
 date: 2018-11-21T00:00:00-07:00
 tags:
 author: "Hubert Lin"
-showToc: false
-TocOpen: false
 draft: false
 hidemeta: false
 comments: false

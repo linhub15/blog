@@ -3,8 +3,6 @@ title: 'Beware of incremental database Ids'
 date: 2021-12-21T00:00:00-07:00
 tags: ['db', 'lessons-learned']
 author: 'Hubert Lin'
-showToc: false
-TocOpen: false
 draft: false
 hidemeta: false
 comments: true

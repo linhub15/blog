@@ -3,8 +3,6 @@ title: 'Choosing a z-index convention with Tailwind CSS'
 date: 2024-04-26T00:00:00-07:00
 tags: []
 author: 'Hubert Lin'
-showToc: false
-TocOpen: false
 draft: false
 hidemeta: false
 comments: true
