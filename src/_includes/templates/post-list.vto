@@ -1,0 +1,18 @@
+<ul class="space-y-8 py-4">
+  {{ for post of postslist }}
+  <li>
+    <h2 class="text-2xl">
+      <a href="{{ post.url }}" {{ if post.url == url }} aria-current="page"{{ /if }}>
+        {{ post.title || post.url }}
+      </a>
+    </h2>
+
+    {{ include "templates/post-details.vto" {
+      date: post.date,
+      tags: post.tags,
+      author: post.author,
+      readingInfo: post.readingInfo
+    } }}
+  </li>
+  {{ /for }}
+</ul>

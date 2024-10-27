@@ -1,0 +1,11 @@
+lang: en
+menu_links: []
+metas:
+  site: Hubert Lin
+  description: Hubert's blogs and projects
+  title: =title
+  image: =image
+  github: "https://github.com/linhub15"
+  linkedin: "https://linkedin.com/in/linhub"
+  lang: en
+  generator: false

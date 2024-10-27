@@ -1,0 +1,14 @@
+---
+layout: layouts/base.vto
+---
+<article class="post" data-pagefind-body>
+  <header class="py-2">
+    <h1 class="post-title">{{ it.title }}</h1>
+
+    {{ it.subtitle |> md }}
+  </header>
+
+  <div class="prose dark:prose-invert">
+    {{ content }}
+  </div>
+</article>

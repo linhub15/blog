@@ -1,0 +1,15 @@
+nav:
+  next_post: Newer post →
+  previous_post: ← Older post
+  continue_reading: Continue reading →
+  posts_title: Blog Posts
+  back: ← Back
+  page: Page
+  next: Next →
+  previous: ← Previous
+post:
+  by: by
+  reading_time: min read
+search:
+  by_author: Posts by
+  by_tag: Tagged

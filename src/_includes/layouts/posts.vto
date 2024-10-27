@@ -1,0 +1,49 @@
+---
+layout: layouts/base.vto
+---
+{{ comp Page_Header }}
+  <h1 class="text-5xl py-4">{{ title }}</h1>
+
+  {{ if pagination.page === 1 }}
+  {{ set pageTags = search.pages("type=tag", "tag") }}
+  {{ if pageTags.length }}
+  <nav class="py-4">    
+    <ul class="flex gap-3 py-2">
+    {{ for page of pageTags }}
+      <li><a href="{{ page.url }}" class="badge">{{ page.tag }}</a></li>
+    {{ /for }}
+    </ul>
+  </nav>
+  {{ /if }}
+  {{ /if }}
+
+  {{ if pagination.page === 1 }}
+  <div class="mt-4" id="search"></div>
+  {{ /if }}
+{{ /comp }}
+
+
+
+{{ include "templates/post-list.vto" { postslist: results } }}
+
+{{ if pagination.totalPages !== 1 }}
+<nav class="mt-20 border-t border-t-gray-700 py-4">
+  <ul class="grid grid-cols-3">
+      {{- if pagination.previous }}
+      <li>
+        <a href="{{ pagination.previous }}" rel="prev">{{ i18n.nav.previous }}</a>
+      </li>
+      {{ /if }}
+
+    <li class="block text-center self-center col-start-2 text-sm text-gray-400">
+      {{ i18n.nav.page }} {{ pagination.page }}
+    </li>
+
+      {{- if pagination.next }}
+      <li class="text-right">
+        <a href="{{ pagination.next }}" rel="next">{{ i18n.nav.next }}</a>
+      </li>
+      {{ /if }}
+  </ul>
+</nav>
+{{ /if }}
