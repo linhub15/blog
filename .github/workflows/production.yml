@@ -8,8 +8,8 @@ on:
 
 jobs:
   build:
-    name: hugo
     runs-on: ubuntu-latest
+    name: deploy
     steps:
       - uses: actions/checkout@v4
 
@@ -19,10 +19,8 @@ jobs:
 
       - run: deno task build
 
-      - name: Deploy
-        uses: sebastianpopp/ftp-action@releases/v2
+      - uses: cloudflare/wrangler-action@v3
         with:
-          host: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          localDir: "_site"
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy _site --project-name=example
