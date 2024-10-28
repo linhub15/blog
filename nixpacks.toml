@@ -1,0 +1,10 @@
+[phases.setup]
+nixPkgs = ['deno']
+nixpkgsArchive = "8671d601edd7871417c82a539f35e51f8cb0c904"
+
+[phases.build]
+cmds = ['deno task build']
+
+[start]
+cmd = 'deno task start'
+onlyIncludeFiles = ['./_site']
