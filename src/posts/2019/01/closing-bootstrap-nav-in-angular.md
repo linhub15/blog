@@ -66,15 +66,18 @@ you want to have the behavior. I put it on my div.content-wrapper.
 <app-top-nav></app-top-nav>
 
 <!-- appCloseNav directive closes the top-nav.component -->
-<div id="content-wrapper" appCloseNav> 
+<div id="content-wrapper" appCloseNav>
   <div class="container" role="document">
     <div class="row">
-      <section class="col-12 mt-1" id="content" >
+      <section class="col-12 mt-1" id="content">
         <router-outlet></router-outlet>
       </section>
-    </div> <!-- / .row -->
-  </div> <!-- / .container -->
-</div> <!-- / .cotent-wrapper -->
+    </div>
+    <!-- / .row -->
+  </div>
+  <!-- / .container -->
+</div>
+<!-- / .cotent-wrapper -->
 
 <app-footer></app-footer>
 ```

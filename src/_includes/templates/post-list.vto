@@ -1,9 +1,9 @@
 <ul class="space-y-8 py-4">
   {{ for post of postslist }}
   <li>
-    <h2 class="text-2xl">
+    <h2 class="block text-3xl">
       <a href="{{ post.url }}" {{ if post.url == url }} aria-current="page"{{ /if }}>
-        {{ post.title || post.url }}
+      {{ post.title || post.url }}
       </a>
     </h2>
 
