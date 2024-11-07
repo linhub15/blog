@@ -1,6 +1,6 @@
 <style>
   .divider-dot {
-    & p:nth-child(-n+1)::after {
+    & span:nth-child(-n+1)::after {
       content: "•";
       padding-left: .5em;
       align-self: stretch;
@@ -8,21 +8,22 @@
   }
 </style>
 
-<div class="divider-dot flex w-full items-center gap-3 py-2 text-sm text-[--color-dim]">
-  <p>
-    <time datetime="{{ date |> date('DATETIME') }}">
-      {{ date |> date('LLLL d, y') }}
-    </time>
-  </p>
+<div class="flex flex-col md:flex-row w-full md:space-x-3 py-2 md:items-center text-sm text-[--color-dim]">
+  <div class="divider-dot">
+    <span>
+      <time datetime="{{ date |> date('DATETIME') }}">
+        {{ date |> date('LLLL d, y') }}
+      </time>
+    </span>
+    <span>{{ it.readingInfo.minutes }} {{ i18n.post.reading_time}}</span>
+  </div>
 
-  <p>{{ it.readingInfo.minutes }} {{ i18n.post.reading_time}}</p>
-
-  <div class="flex items-center gap-2">
+  <div class="flex flex-wrap items-center gap-2 my-2">
     {{ for tag of tags }}
       {{ set page = search.page(`type=tag tag="${tag}"`) }}
 
       {{ if page }}
-        <a data-pagefind-filter="filter" class="badge" href="{{ page.url }}">{{ tag }}</a>
+        <a data-pagefind-filter="filter" class="badge size-fit" href="{{ page.url }}">{{ tag }}</a>
       {{ /if }}
     {{ /for }}
   </div>
