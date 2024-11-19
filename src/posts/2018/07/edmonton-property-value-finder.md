@@ -31,7 +31,7 @@ front-end components.
 _Although the data is from the City of Edmonton, I cannot guarantee the
 **accuracy** or the **freshness** of the data._
 
-[Try Out the App](https://open-property.ca)
+[Try Out the App](https://openproperty.ca)
 
 ## So what's it do?
 
