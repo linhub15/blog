@@ -21,3 +21,33 @@ main {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.markdown-alert {
+  --color-note: #1f6feb;
+  --size-8: 0.5rem;
+  --size-16: 1rem;
+
+  padding: var(--size-8) var(--size-16);
+  margin-bottom: var(--size-16);
+  color: inherit;
+  border-left: 0.2em solid var(--color-note);
+}
+
+.markdown-alert p, h1, h2, h3 {
+  margin: var(--size-8) 0;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1;
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
