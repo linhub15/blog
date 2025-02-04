@@ -13,8 +13,8 @@ cover:
 
 [Turso](https://turso.tech) offers a SQLite like database called
 [libSQL](https://docs.turso.tech/libsql) as an alternative to conventional dbs
-like PostgreSQL and MySQL. I was curious, so I tried hosting it on an Ubuntu VPS.
-I used [Coolify](https://coolify.io/) and [Deno](https://deno.com/) for
+like PostgreSQL and MySQL. I was curious, so I tried hosting it on an Ubuntu
+VPS. I used [Coolify](https://coolify.io/) and [Deno](https://deno.com/) for
 generating the JWT to secure the server.
 
 ## What is libSQL?
@@ -30,7 +30,7 @@ perfect for integration testing in CI pipelines for speed.
 // Example targetting an sqlite file named `local.db`
 import { createClient } from "npm:@libsql/client";
 const client = createClient({
-    url: "file:local.db",
+  url: "file:local.db",
 });
 ```
 
@@ -142,29 +142,29 @@ import * as jose from "npm:jose";
 const access = "rw"; // or "ro";
 
 const keyPair = await crypto.subtle.generateKey(
-    {
-        name: "Ed25519",
-        namedCurve: "Ed25519",
-    },
-    true,
-    ["sign", "verify"],
+  {
+    name: "Ed25519",
+    namedCurve: "Ed25519",
+  },
+  true,
+  ["sign", "verify"],
 );
 
 const rawPublicKey = await crypto.subtle.exportKey("raw", keyPair.publicKey);
 
 const urlSafeBase64PublicKey = btoa(
-    String.fromCharCode(...new Uint8Array(rawPublicKey)),
+  String.fromCharCode(...new Uint8Array(rawPublicKey)),
 )
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/, "");
+  .replace(/\+/g, "-")
+  .replace(/\//g, "_")
+  .replace(/=+$/, "");
 
 console.log("Public Key\n", urlSafeBase64PublicKey);
 
 const jwt = await (new jose.SignJWT({ "a": access }))
-    .setProtectedHeader({ alg: "EdDSA", "typ": "JWT" })
-    .setIssuedAt()
-    .sign(keyPair.privateKey);
+  .setProtectedHeader({ alg: "EdDSA", "typ": "JWT" })
+  .setIssuedAt()
+  .sign(keyPair.privateKey);
 
 console.log("JWT\n", jwt);
 ```
@@ -196,9 +196,9 @@ server is now secured using JWT-based authentication.
 ```javascript
 import { createClient } from "npm:@libsql/client";
 const client = createClient({
-    url: "http://x.x.x.x:8080",
-    authToken:
-        "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3MzA5NTgzMDZ9.lplN4-LrIQxaiiX74MDiQ3UnQgwZQS_Eee8_m0h-BiNiX3fyPZ7FGiMIQux38HXpy4ISjJWcRGWbWPCN3urPAQ",
+  url: "http://x.x.x.x:8080",
+  authToken:
+    "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3MzA5NTgzMDZ9.lplN4-LrIQxaiiX74MDiQ3UnQgwZQS_Eee8_m0h-BiNiX3fyPZ7FGiMIQux38HXpy4ISjJWcRGWbWPCN3urPAQ",
 });
 const result = await client.execute("select 1;");
 console.log(result);

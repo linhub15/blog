@@ -26,8 +26,8 @@ name, and a [Resend](https://resend.com) account.
 
 > [!NOTE]
 > At the time of writing, the limits for Resend are 100 emails per day and 3000
-> per month. I've never sent that many emails in a day, but depending on your needs
-> you may choose a different SMTP provider.
+> per month. I've never sent that many emails in a day, but depending on your
+> needs you may choose a different SMTP provider.
 
 ## Receiving emails to your domain
 
