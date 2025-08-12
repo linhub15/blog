@@ -12,15 +12,15 @@ main {
   padding: var(--row-gap-medium) 0;
   max-width: min(100% - 15vw, 45em);
   margin: 0 auto;
-
+  
   & > :first-child {
     margin-top: 0;
   }
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
 
 .markdown-alert {
   --color-note: #1f6feb;

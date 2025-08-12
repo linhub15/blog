@@ -1,8 +1,5 @@
 import date, { type Options as DateOptions } from "lume/plugins/date.ts";
 import tailwindcss from "lume/plugins/tailwindcss.ts";
-import typography from "npm:@tailwindcss/typography";
-import postcss from "lume/plugins/postcss.ts";
-import terser from "lume/plugins/terser.ts";
 import prism, { type Options as PrismOptions } from "lume/plugins/prism.ts";
 import basePath from "lume/plugins/base_path.ts";
 import slugifyUrls from "lume/plugins/slugify_urls.ts";
@@ -32,16 +29,8 @@ export default function (userOptions?: Options) {
 
   return (site: Lume.Site) => {
     site
-      .use(
-        tailwindcss({
-          extensions: [".html", ".vto"],
-          options: {
-            plugins: [typography],
-            darkMode: "selector",
-          },
-        }),
-      )
-      .use(postcss())
+      .use(tailwindcss({minify: true}))
+      .add("styles.css")
       .use(basePath())
       .use(prism(options.prism))
       .use(readingInfo())
@@ -51,7 +40,6 @@ export default function (userOptions?: Options) {
       .use(footnotes())
       .use(resolveUrls())
       .use(slugifyUrls())
-      .use(terser())
       .use(pagefind(options.pagefind))
       .use(sitemap())
       .copy([".jpg", ".jpeg", ".png", ".svg", ".webp", ".ico", ".mp4"])
