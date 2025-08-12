@@ -54,7 +54,7 @@ export default function (userOptions?: Options) {
       .use(terser())
       .use(pagefind(options.pagefind))
       .use(sitemap())
-      .copy([".jpg", ".jpeg", ".png", ".svg", ".webp", ".ico"])
+      .copy([".jpg", ".jpeg", ".png", ".svg", ".webp", ".ico", ".mp4"])
       .mergeKey("extra_head", "stringArray")
       .preprocess([".md"], (pages) => {
         for (const page of pages) {
